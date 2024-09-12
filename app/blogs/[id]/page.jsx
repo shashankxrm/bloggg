@@ -10,18 +10,18 @@ const Page = ({ params }) => {
 
   const [data, setData] = useState(null);
 
-  const fetchBlogData = async () => {
-    const response = await axios.get('/api/blog', {
-      params: {
-        id: params.id
-      }
-    })
-    setData(response.data);
-  }
-
   useEffect(() => {
+    const fetchBlogData = async () => {
+      const response = await axios.get('/api/blog', {
+        params: {
+          id: params.id
+        }
+      });
+      setData(response.data);
+    };
+
     fetchBlogData();
-  }, [])
+  }, [params.id]);
 
   return (data ? <>
     <div className='bg-gray-200 py-5 px-5 md:px-12 lg:px-28'>
